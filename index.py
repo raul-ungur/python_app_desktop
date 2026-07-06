@@ -4,7 +4,6 @@ root = tk.Tk()
 root.title("Task Manager")
 root.geometry("400x300")
 
-
 input_var = tk.StringVar()
 task_entry = tk.Entry(root,textvariable = input_var, font=('calibre',10,'normal'))
 task_entry.pack()
