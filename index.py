@@ -4,15 +4,38 @@ root = tk.Tk()
 root.title("Task Manager")
 root.geometry("400x300")
 
+pag1 = tk.Frame(root,bg="red")
+pag1.pack(fill=tk.BOTH, expand=True, padx=10, pady=10, )
+
+pag2 = tk.Frame(root,bg="green")
+
+### pagina 1
+go_pag2 = tk.Button(pag1, text= "view tasks", command= lambda: def_go_pag2())
+go_pag2.pack()
+def def_go_pag2():
+  pag1.destroy()
+  pag2.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+###
+
+
+### pagina 2
 input_var = tk.StringVar()
-task_entry = tk.Entry(root,textvariable = input_var, font=('calibre',10,'normal'))
+task_entry = tk.Entry(pag2,textvariable = input_var, font=('calibre',10,'normal'))
 task_entry.pack()
-button = tk.Button(root, text= "add task", command= lambda: show_input())
+button = tk.Button(pag2, text= "add task", command= lambda: show_input())
 button.pack()
+go_pag1 = tk.Button(pag2, text= "view tasks", command= lambda: def_go_pag1())
+go_pag1.pack()
+def def_go_pag1():
+  pag2.destroy()
+  pag1.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+###
+
+
 
 
 def show_input():
-    frame = tk.Frame(root, bg="blue")
+    frame = tk.Frame(pag2, bg="blue")
     frame.pack(fill=tk.X, padx=5, pady=5)
     input_get = input_var.get()
     input_view = tk.Label(frame, text= input_get, font=('calibre',10,'normal'))
