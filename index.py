@@ -10,10 +10,10 @@ pag1.pack(fill=tk.BOTH, expand=True, padx=10, pady=10, )
 pag2 = tk.Frame(root,bg="green")
 
 ### pagina 1
-go_pag2 = tk.Button(pag1, text= "view tasks", command= lambda: def_go_pag2())
+go_pag2 = tk.Button(pag1, text= "add task", command= lambda: def_go_pag2())
 go_pag2.pack()
 def def_go_pag2():
-  pag1.destroy()
+  pag1.pack_forget()
   pag2.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 ###
 
@@ -27,7 +27,7 @@ button.pack()
 go_pag1 = tk.Button(pag2, text= "view tasks", command= lambda: def_go_pag1())
 go_pag1.pack()
 def def_go_pag1():
-  pag2.destroy()
+  pag2.pack_forget()
   pag1.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 ###
 
