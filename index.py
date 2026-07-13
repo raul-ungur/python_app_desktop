@@ -1,5 +1,9 @@
 import tkinter as tk
 
+from flask import json
+
+import os
+
 root = tk.Tk()
 root.title("Task Manager")
 root.geometry("400x300")
@@ -34,10 +38,14 @@ def def_go_pag1():
 
 
 
+
+
 def show_input():
+    input_get = input_var.get()
+    task_json = "task.json"
     frame = tk.Frame(pag2, bg="blue")
     frame.pack(fill=tk.X, padx=5, pady=5)
-    input_get = input_var.get()
+
     input_view = tk.Label(frame, text= input_get, font=('calibre',10,'normal'))
     input_view.pack(side=tk.LEFT, padx=5, pady=5) 
     def remove_task():
@@ -45,6 +53,21 @@ def show_input():
     
     button_remove = tk.Button(frame, text= "remove task", command= remove_task )
     button_remove.pack(side=tk.RIGHT, padx=5, pady=5)
+
+    if (os.path.exists(task_json)):
+        with open(task_json, "r") as file:
+            try:
+                dati = json.load(file)
+            except json.JSONDecodeError:
+                dati = []
+    else:
+        dati = []
+
+    dati.append(input_get)
+    with open(task_json, "w") as file:
+        json.dump(dati, file)
+    print("Task saved to task.json")
+
 
 
 
