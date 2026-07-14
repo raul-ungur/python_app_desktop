@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from flask import json
+import json
 
 import os
 
@@ -26,9 +26,9 @@ def def_go_pag2():
 input_var = tk.StringVar()
 task_entry = tk.Entry(pag2,textvariable = input_var, font=('calibre',10,'normal'))
 task_entry.pack()
-button = tk.Button(pag2, text= "add task", command= lambda: show_input())
+button = tk.Button(pag2, text= "add task", command= lambda: show_input() and save_task())
 button.pack()
-go_pag1 = tk.Button(pag2, text= "view tasks", command= lambda: def_go_pag1())
+go_pag1 = tk.Button(pag2, text= "view tasks", command= lambda: def_go_pag1() )
 go_pag1.pack()
 def def_go_pag1():
   pag2.pack_forget()
@@ -42,7 +42,6 @@ def def_go_pag1():
 
 def show_input():
     input_get = input_var.get()
-    task_json = "task.json"
     frame = tk.Frame(pag2, bg="blue")
     frame.pack(fill=tk.X, padx=5, pady=5)
 
@@ -54,8 +53,15 @@ def show_input():
     button_remove = tk.Button(frame, text= "remove task", command= remove_task )
     button_remove.pack(side=tk.RIGHT, padx=5, pady=5)
 
-    if (os.path.exists(task_json)):
-        with open(task_json, "r") as file:
+    
+
+
+def save_task():
+    input_get = input_var.get()
+    tasks_json = "tasks.json"
+
+    if (os.path.exists(tasks_json)):
+        with open(tasks_json, "r") as file:
             try:
                 dati = json.load(file)
             except json.JSONDecodeError:
@@ -64,11 +70,8 @@ def show_input():
         dati = []
 
     dati.append(input_get)
-    with open(task_json, "w") as file:
+    with open(tasks_json, "w") as file:
         json.dump(dati, file)
-    print("Task saved to task.json")
-
-
-
+    print("Task saved to tasks.json")
 
 root.mainloop()
