@@ -26,17 +26,22 @@ def def_go_pag2():
 input_var = tk.StringVar()
 task_entry = tk.Entry(pag2,textvariable = input_var, font=('calibre',10,'normal'))
 task_entry.pack()
-button = tk.Button(pag2, text= "add task", command= lambda: show_input() and save_task())
+button = tk.Button(pag2, text= "add task", command= lambda: def_but_add_task())
 button.pack()
 go_pag1 = tk.Button(pag2, text= "view tasks", command= lambda: def_go_pag1() )
 go_pag1.pack()
+input_date = tk.StringVar()
+date_entry = tk.Entry(pag2,textvariable = input_date, font=('calibre',10,'normal'))
+date_entry.pack()
 def def_go_pag1():
   pag2.pack_forget()
   pag1.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 ###
 
 
-
+def def_but_add_task():
+    show_input()
+    save_task()
 
 
 
@@ -58,6 +63,7 @@ def show_input():
 
 def save_task():
     input_get = input_var.get()
+    input_date_get = input_date.get()
     tasks_json = "tasks.json"
 
     if (os.path.exists(tasks_json)):
@@ -69,7 +75,7 @@ def save_task():
     else:
         dati = []
 
-    dati.append(input_get)
+    dati.append({input_date_get : {"input": input_get}})
     with open(tasks_json, "w") as file:
         json.dump(dati, file)
     print("Task saved to tasks.json")
