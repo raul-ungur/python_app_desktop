@@ -1,8 +1,10 @@
 import tkinter as tk
-
 import json
-
 import os
+
+import database 
+
+import ui
 
 root = tk.Tk()
 root.title("Task Manager")
@@ -41,12 +43,13 @@ def def_go_pag1():
 
 def def_but_add_task():
     show_input()
-    save_task()
+    database.save_task(input_get, input_date_get)
 
+input_date_get = input_date.get()
+input_get = input_var.get()
 
 
 def show_input():
-    input_get = input_var.get()
     frame = tk.Frame(pag2, bg="blue")
     frame.pack(fill=tk.X, padx=5, pady=5)
 
@@ -61,23 +64,6 @@ def show_input():
     
 
 
-def save_task():
-    input_get = input_var.get()
-    input_date_get = input_date.get()
-    tasks_json = "tasks.json"
 
-    if (os.path.exists(tasks_json)):
-        with open(tasks_json, "r") as file:
-            try:
-                dati = json.load(file)
-            except json.JSONDecodeError:
-                dati = []
-    else:
-        dati = []
-
-    dati.append({input_date_get : {"input": input_get}})
-    with open(tasks_json, "w") as file:
-        json.dump(dati, file)
-    print("Task saved to tasks.json")
 
 root.mainloop()
