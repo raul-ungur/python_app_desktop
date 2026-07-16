@@ -1,9 +1,5 @@
 import tkinter as tk
-import json
-import os
-
 import database 
-
 import ui
 
 root = tk.Tk()
@@ -60,10 +56,5 @@ def show_input():
     
     button_remove = tk.Button(frame, text= "remove task", command= remove_task )
     button_remove.pack(side=tk.RIGHT, padx=5, pady=5)
-
-    
-
-
-
 
 root.mainloop()
