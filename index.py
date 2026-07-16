@@ -38,17 +38,19 @@ def def_go_pag1():
 
 
 def def_but_add_task():
+    input_date_get = input_date.get()
     show_input()
     database.save_task(input_get, input_date_get)
 
-input_date_get = input_date.get()
-input_get = input_var.get()
+
+
 
 
 def show_input():
+    global input_get
+    input_get = input_var.get()
     frame = tk.Frame(pag2, bg="blue")
     frame.pack(fill=tk.X, padx=5, pady=5)
-
     input_view = tk.Label(frame, text= input_get, font=('calibre',10,'normal'))
     input_view.pack(side=tk.LEFT, padx=5, pady=5) 
     def remove_task():
