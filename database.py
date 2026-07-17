@@ -1,10 +1,16 @@
 import json
 import os
 
+def load_tasks():
+    with open('tasks.json', 'r') as file:
+        dati = json.load(file)
+    return dati
+
 def save_task(input_var, input_date_get):
     tasks_json = "tasks.json"
-    
-    if (os.path.exists(tasks_json)):
+    global dati
+     
+    if (os.path.exists(tasks_json)): 
         with open(tasks_json, "r") as file:
             try:
                 dati = json.load(file)
